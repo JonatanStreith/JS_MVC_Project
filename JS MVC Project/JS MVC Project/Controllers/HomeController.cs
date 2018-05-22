@@ -29,5 +29,11 @@ namespace JS_MVC_Project.Controllers
             return View();
         }
 
+        public ActionResult FeverCheck()
+        {
+            return View();
+        }
+
+
     }
 }
