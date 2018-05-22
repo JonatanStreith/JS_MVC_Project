@@ -1,4 +1,4 @@
-﻿@model JS_MVC_Project.Models.FeverCheck
+﻿@model JS_MVC_Project.Models.FeverChecker
 
 @{
     ViewBag.Title = "FeverCheck";
@@ -6,3 +6,38 @@
 
 <h2>FeverCheck</h2>
 
+
+
+@using (Html.BeginForm("FeverCheck", "Home", FormMethod.Post))
+{
+
+
+    <div class="form-group">
+        <label for="temp">Are you Hot or Not?</label>
+        <input type="number" value="37" class="form-control" id="temp" name="temp">
+    </div>
+
+
+
+    <div class="row" id="wrapper">
+        <div id="buttons" class="col-md-2">
+
+            @*<form action="">*@
+                <input type="radio" name="scale" value="Celsius" checked="checked"> Celsius<br>
+                <input type="radio" name="scale" value="Farenheit"> Farenheit<br>
+            @*</form>*@
+
+            <input type="submit" class="btn btn-basic" value="Check!">
+        </div>
+
+        <div id="outputfield" class="col-md-2">
+
+            <p id="output">@ViewBag.TempMessage</p>
+
+        </div>
+
+
+
+    </div>
+
+}
