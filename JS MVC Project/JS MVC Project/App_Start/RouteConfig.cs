@@ -20,6 +20,11 @@ namespace JS_MVC_Project
                 defaults: new {controller = "Home", action = "FeverCheck"}
             );
 
+            routes.MapRoute(
+    name: "GuessingGame",
+    url: "GuessingGame",
+    defaults: new { controller = "Home", action = "GuessingGame" }
+);
 
 
             routes.MapRoute(

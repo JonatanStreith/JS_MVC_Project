@@ -1,0 +1,79 @@
+﻿@model JS_MVC_Project.Models.GuessingGameModel
+
+@{
+    ViewBag.Title = "Guessing Game";
+
+    HttpCookie highScore = Request.Cookies["Highscore"];
+
+    int choiceNumber = Convert.ToInt32(Session["choiceNumber"]);
+
+}
+
+<h2>Guessing Game</h2>
+
+
+
+@using (Html.BeginForm("GuessingGame", "Home", FormMethod.Post))
+{
+
+    @*<div class="form-group">
+        <label for="name">Player name:</label>
+        <input type="text" class="form-control" id="name" name="name">
+    </div>*@
+
+
+    <div class="form-group">
+        <label for="guess">Guess the number! (0-100)</label>
+        <input type="number" value="@choiceNumber" class="form-control" id="guess" name="guess">
+    </div>
+
+
+
+    <div class="row" id="wrapper">
+        <div id="buttons" class="col-md-2">
+
+
+            <input type="submit" class="btn btn-basic" value="Check!">
+        </div>
+
+        <div id="outputfield" class="col-md-2">
+
+            <table id="result_output">
+                <tr>
+                    <td>You've guessed @Session["numberOfGuesses"] times.</td>
+                </tr>
+                <tr>
+                    <td>@Session["reply"]</td>
+                </tr>
+            </table>
+
+
+        </div>
+
+    </div>
+
+    <hr />
+
+    <div>
+
+        <p>High scores!</p>
+
+        <table id="Highscores">
+
+
+            @{
+                for (int i = 1; i <= highScore.Values.Count; i++)
+                {
+                    <tr><td>@highScore[Convert.ToString(i)]</td></tr>
+                }
+            }
+
+        </table>
+
+
+
+
+
+    </div>
+
+}

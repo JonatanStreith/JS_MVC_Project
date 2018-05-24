@@ -1,6 +1,4 @@
-﻿body {
-}
-
+﻿
 #outputfield {
     position: relative;
     width: 100%;
@@ -15,4 +13,8 @@
 .div {
     padding: 10px;
     border: 1px solid black;
+}
+
+#result_output {
+    empty-cells: show;
 }

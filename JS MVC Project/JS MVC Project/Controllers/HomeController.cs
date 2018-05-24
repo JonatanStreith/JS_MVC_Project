@@ -38,14 +38,74 @@ namespace JS_MVC_Project.Controllers
             return View();
         }
 
-
-
-
         public ActionResult FeverCheck()
         {
             return View();
         }
 
+
+
+        [HttpPost]
+        public ActionResult GuessingGame(int guess, string name)
+        {
+
+            int random = Convert.ToInt32(Session["randomNumber"]);
+            
+            Session["numberOfGuesses"] = Convert.ToInt32(Session["numberOfGuesses"]) +1;
+            Session["choiceNumber"] = guess;
+
+
+            if (guess < random)
+            { Session["reply"] = "Too low!"; }
+            else if (guess > random)
+            { Session["reply"] = "Too high!"; }
+            else
+            {
+
+
+                HttpCookie highScore = Request.Cookies["Highscore"];
+                highScore[Convert.ToString(highScore.Values.Count+1)] = Convert.ToString(Session["numberOfGuesses"]);
+                highScore.Expires = DateTime.Now.AddMonths(1);
+                Response.Cookies.Add(highScore);
+
+
+
+
+                Session["reply"] = "That's right!";
+                Session["numberOfGuesses"] = 0;
+                Session["randomNumber"] = new Random().Next(100);
+
+
+
+            }
+            return View();
+        }
+
+
+        public ActionResult GuessingGame()
+        {
+            if (Request.Cookies.AllKeys.Contains("Highscore") == false)
+            {
+                HttpCookie highScore = new HttpCookie("Highscore");
+                highScore.Expires = DateTime.Now.AddMonths(1);
+                Response.Cookies.Add(highScore);
+            }
+
+
+
+
+            if (Session["randomNumber"] == null)
+            { Session["randomNumber"] = new Random().Next(100); }
+
+            if(Session["choiceNumber"] == null)
+            { Session["choiceNumber"] = 50; }
+
+            if (Session["numberOfGuesses"] == null)
+            { Session["numberOfGuesses"] = 0; }
+
+
+            return View();
+        }
 
     }
 }
