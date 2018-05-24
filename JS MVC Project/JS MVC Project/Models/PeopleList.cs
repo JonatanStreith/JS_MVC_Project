@@ -5,7 +5,8 @@ using System.Web;
 
 namespace JS_MVC_Project.Models
 {
-    public class GuessingGameModel
+    public class PeopleList
     {
+        public List<PersonData> listing = new List<PersonData>();
     }
 }

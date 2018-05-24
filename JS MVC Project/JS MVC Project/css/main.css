@@ -18,3 +18,15 @@
 #result_output {
     empty-cells: show;
 }
+
+#People_List{
+
+}
+
+
+#People_List td{
+    padding: 10px;
+}
+
+
+}

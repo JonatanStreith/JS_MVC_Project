@@ -107,5 +107,26 @@ namespace JS_MVC_Project.Controllers
             return View();
         }
 
+
+
+
+        public ActionResult ListOfPeople()
+        {
+
+            PeopleList personList = new PeopleList();
+
+
+
+            personList.listing.Add(new PersonData("Jonatan Streith", "070-2560731", "Skövde"));
+            personList.listing.Add(new PersonData("Vladimir Putin", "0500-Communism", "Moscow"));
+            personList.listing.Add(new PersonData("Princess Celestia", "0500-Sunshine", "Canterlot"));
+            personList.listing.Add(new PersonData("Monkey D. Luffy", "020-GomuGomu", "Grand Line"));
+            personList.listing.Add(new PersonData("Sheogorath", "0660-CHEESE", "Shivering Isles"));
+
+            return View(personList);
+        }
+
+
+
     }
 }
