@@ -113,15 +113,15 @@ namespace JS_MVC_Project.Controllers
         public ActionResult ListOfPeople()
         {
 
-            PeopleList personList = new PeopleList();
+            //PeopleList personList = new PeopleList();
 
+            List<PersonData> personList = new List<PersonData>();
 
-
-            personList.listing.Add(new PersonData("Jonatan Streith", "070-2560731", "Skövde"));
-            personList.listing.Add(new PersonData("Vladimir Putin", "0500-Communism", "Moscow"));
-            personList.listing.Add(new PersonData("Princess Celestia", "0500-Sunshine", "Canterlot"));
-            personList.listing.Add(new PersonData("Monkey D. Luffy", "020-GomuGomu", "Grand Line"));
-            personList.listing.Add(new PersonData("Sheogorath", "0660-CHEESE", "Shivering Isles"));
+            personList.Add(new PersonData("Jonatan Streith", "070-2560731", "Skövde"));
+            personList.Add(new PersonData("Vladimir Putin", "0500-Communism", "Moscow"));
+            personList.Add(new PersonData("Princess Celestia", "0500-Sunshine", "Canterlot"));
+            personList.Add(new PersonData("Monkey D. Luffy", "020-GomuGomu", "Grand Line"));
+            personList.Add(new PersonData("Sheogorath", "0660-CHEESE", "Shivering Isles"));
 
             return View(personList);
         }

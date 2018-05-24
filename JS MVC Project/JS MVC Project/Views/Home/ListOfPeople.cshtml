@@ -1,4 +1,4 @@
-﻿@model JS_MVC_Project.Models.PeopleList
+﻿@model IEnumerable<JS_MVC_Project.Models.PeopleList>
 
 @{
     ViewBag.Title = "List Of People";
@@ -9,12 +9,12 @@
 
 <table id="People_List">
     @{
-        for (int i = 0; i < Model.listing.Count; i++)
+        for (int i = 0; i < Model.Count; i++)
         {
             <tr>
-                <td>@Model.listing[i].Name</td>
-                <td>@Model.listing[i].Phone</td>
-                <td>@Model.listing[i].City</td>
+                <td>@Model[i].Name</td>
+                <td>@Model[i].Phone</td>
+                <td>@Model[i].City</td>
             </tr>
         }
     }
