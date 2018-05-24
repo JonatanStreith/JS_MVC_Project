@@ -11,19 +11,37 @@
     @{
         for (int i = 0; i < Model.listing.Count; i++)
         {
-    <tr>
-        <td>@Model.listing[i].Name</td>
-        <td>@Model.listing[i].Phone</td>
-        <td>@Model.listing[i].City</td>
-
-
-
-
-
-    </tr>
+            <tr>
+                <td>@Model.listing[i].Name</td>
+                <td>@Model.listing[i].Phone</td>
+                <td>@Model.listing[i].City</td>
+            </tr>
         }
     }
 
-
-
 </table>
+
+<div class="form-group">
+    <label for="name">Filter list by name:</label>
+    <input type="text" class="form-control" id="filter" name="filter">
+</div>
+
+
+<hr />
+<p>Add to list:</p>
+<div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" name="name">
+    <label for="name">Phone number:</label>
+    <input type="text" class="form-control" id="phone" name="phone">
+    <label for="name">City of residence:</label>
+    <input type="text" class="form-control" id="city" name="city">
+
+
+
+</div>
+
+
+
+
+
