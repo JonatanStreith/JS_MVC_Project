@@ -19,12 +19,37 @@
                         <td>@item.Name</td>
                         <td>@item.Phone</td>
                         <td>@item.City</td>
-                        <td>@Html.ActionLink("Remove", "RemovePerson", "Home", new { person = item })</td>
+
+                        <td>
+                            @using (Html.BeginForm("RemovePerson", "Home", FormMethod.Post))
+                            {
+
+                                <input type="hidden" name="person" value="@item.Name" />
+                                <input type="submit" class="btn btn-basic" value="Remove" />
+                            }
+                        </td>
                     </tr>
                 }
             }
 
         </table>
+
+
+        <div class="btn-group">
+
+            @using (Html.BeginForm("SortList", "Home", FormMethod.Post))
+            {
+                <input type="submit" class="btn btn-basic" name="pressedButton" value="Name" />
+                <input type="submit" class="btn btn-basic" name="pressedButton" value="R. Name" />
+                <input type="submit" class="btn btn-basic" name="pressedButton" value="City" />
+                <input type="submit" class="btn btn-basic" name="pressedButton" value="R. City" />
+
+            }
+
+        </div>
+
+
+
 
     </div>
 
@@ -35,7 +60,13 @@
                 <label for="filter">Filter list by name:</label>
                 <input type="text" class="form-control" id="filter" name="filter">
 
+
                 <input type="submit" class="btn btn-basic" value="Filter">
+
+                <label for="case_sensitive">Case Sensitive: </label>
+                <input type="checkbox" id="caseSensitive" value="true" name="caseSensitive" checked />
+                <input type="hidden" value="false" name="caseSensitive">
+
             }
 
             @using (Html.BeginForm("ClearFilter", "Home", FormMethod.Post))
@@ -43,6 +74,8 @@
                 <input type="submit" class="btn btn-basic" value="Clear">
 
             }
+
+
         </div>
 
         <hr />

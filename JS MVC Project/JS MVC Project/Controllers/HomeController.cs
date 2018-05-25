@@ -106,17 +106,29 @@ namespace JS_MVC_Project.Controllers
 
 
         [HttpPost]
-        public ActionResult FilterList(string filter)
+        public ActionResult FilterList(string filter, bool caseSensitive)
         {
             List<PersonData> filteredList = new List<PersonData>();
 
-            foreach (PersonData person in StaticDataStorage.personList)
+
+            if (caseSensitive)
             {
-                if (person.Name == filter)
+                foreach (PersonData person in StaticDataStorage.personList)
                 {
-                    filteredList.Add(person);
+                    if (person.Name.Equals(filter))
+                    { filteredList.Add(person); }
                 }
             }
+            else
+            {
+                foreach (PersonData person in StaticDataStorage.personList)
+                {
+                    if (person.Name.Equals(filter, StringComparison.CurrentCultureIgnoreCase))
+                    { filteredList.Add(person); }
+                }
+
+            }
+
 
             return View("ListOfPeople", filteredList);
         }
@@ -138,12 +150,24 @@ namespace JS_MVC_Project.Controllers
             return View("ListOfPeople", StaticDataStorage.personList);
         }
 
+
         [HttpPost]
-        public ActionResult RemovePerson(PersonData person)
+        public ActionResult RemovePerson(string person)
         {
 
-            StaticDataStorage.RemovePersonFromList(person);
+            PersonData _person = StaticDataStorage.personList.Find(x => x.Name == person);
 
+            StaticDataStorage.RemovePersonFromList(_person);
+
+            return RedirectToAction("ListOfPeople");
+        }
+
+
+        [HttpPost]
+        public ActionResult SortList(string pressedButton)
+        {
+
+            StaticDataStorage.SortList(pressedButton);
 
             return View("ListOfPeople", StaticDataStorage.personList);
         }
