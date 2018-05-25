@@ -19,7 +19,9 @@
     empty-cells: show;
 }
 
-
+.btn{
+    margin-top: 10px;
+}
 
 #People_List td{
     padding: 10px;

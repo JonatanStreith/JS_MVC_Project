@@ -50,8 +50,8 @@ namespace JS_MVC_Project.Controllers
         {
 
             int random = Convert.ToInt32(Session["randomNumber"]);
-            
-            Session["numberOfGuesses"] = Convert.ToInt32(Session["numberOfGuesses"]) +1;
+
+            Session["numberOfGuesses"] = Convert.ToInt32(Session["numberOfGuesses"]) + 1;
             Session["choiceNumber"] = guess;
 
 
@@ -61,21 +61,14 @@ namespace JS_MVC_Project.Controllers
             { Session["reply"] = "Too high!"; }
             else
             {
-
-
                 HttpCookie highScore = Request.Cookies["Highscore"];
-                highScore[Convert.ToString(highScore.Values.Count+1)] = Convert.ToString(Session["numberOfGuesses"]);
+                highScore[Convert.ToString(highScore.Values.Count + 1)] = Convert.ToString(Session["numberOfGuesses"]);
                 highScore.Expires = DateTime.Now.AddMonths(1);
                 Response.Cookies.Add(highScore);
-
-
-
 
                 Session["reply"] = "That's right!";
                 Session["numberOfGuesses"] = 0;
                 Session["randomNumber"] = new Random().Next(100);
-
-
 
             }
             return View();
@@ -91,18 +84,14 @@ namespace JS_MVC_Project.Controllers
                 Response.Cookies.Add(highScore);
             }
 
-
-
-
             if (Session["randomNumber"] == null)
             { Session["randomNumber"] = new Random().Next(100); }
 
-            if(Session["choiceNumber"] == null)
+            if (Session["choiceNumber"] == null)
             { Session["choiceNumber"] = 50; }
 
             if (Session["numberOfGuesses"] == null)
             { Session["numberOfGuesses"] = 0; }
-
 
             return View();
         }
@@ -112,20 +101,52 @@ namespace JS_MVC_Project.Controllers
 
         public ActionResult ListOfPeople()
         {
-
-            //PeopleList personList = new PeopleList();
-
-            List<PersonData> personList = new List<PersonData>();
-
-            personList.Add(new PersonData("Jonatan Streith", "070-2560731", "Skövde"));
-            personList.Add(new PersonData("Vladimir Putin", "0500-Communism", "Moscow"));
-            personList.Add(new PersonData("Princess Celestia", "0500-Sunshine", "Canterlot"));
-            personList.Add(new PersonData("Monkey D. Luffy", "020-GomuGomu", "Grand Line"));
-            personList.Add(new PersonData("Sheogorath", "0660-CHEESE", "Shivering Isles"));
-
-            return View(personList);
+            return View(StaticDataStorage.personList);
         }
 
+
+        [HttpPost]
+        public ActionResult FilterList(string filter)
+        {
+            List<PersonData> filteredList = new List<PersonData>();
+
+            foreach (PersonData person in StaticDataStorage.personList)
+            {
+                if (person.Name == filter)
+                {
+                    filteredList.Add(person);
+                }
+            }
+
+            return View("ListOfPeople", filteredList);
+        }
+
+        [HttpPost]
+        public ActionResult ClearFilter()
+        {
+            return View("ListOfPeople", StaticDataStorage.personList);
+        }
+
+
+
+
+        [HttpPost]
+        public ActionResult AddPerson(string name, string phone, string city)
+        {
+            StaticDataStorage.AddPersonToList(name, phone, city);
+
+            return View("ListOfPeople", StaticDataStorage.personList);
+        }
+
+        [HttpPost]
+        public ActionResult RemovePerson(PersonData person)
+        {
+
+            StaticDataStorage.RemovePersonFromList(person);
+
+
+            return View("ListOfPeople", StaticDataStorage.personList);
+        }
 
 
     }

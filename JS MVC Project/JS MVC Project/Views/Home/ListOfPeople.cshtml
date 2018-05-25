@@ -1,47 +1,67 @@
-﻿@model IEnumerable<JS_MVC_Project.Models.PeopleList>
+﻿@model List<JS_MVC_Project.Models.PersonData>
 
 @{
+
+
     ViewBag.Title = "List Of People";
 }
 
 <h2>List Of People</h2>
 
 
-<table id="People_List">
-    @{
-        for (int i = 0; i < Model.Count; i++)
+<div class="row">
+    <div id="Table_Of_people" class="col-md-6 col-lg-6">
+        <table id="People_List">
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Phone</td>
+                        <td>@item.City</td>
+                        <td>@Html.ActionLink("Remove", "RemovePerson", "Home", new { person = item })</td>
+                    </tr>
+                }
+            }
+
+        </table>
+
+    </div>
+
+    <div id="Input_Fields" class="col-md-4 col-lg-4">
+        <div class="form-group">
+            @using (Html.BeginForm("FilterList", "Home", FormMethod.Post))
+            {
+                <label for="filter">Filter list by name:</label>
+                <input type="text" class="form-control" id="filter" name="filter">
+
+                <input type="submit" class="btn btn-basic" value="Filter">
+            }
+
+            @using (Html.BeginForm("ClearFilter", "Home", FormMethod.Post))
+            {
+                <input type="submit" class="btn btn-basic" value="Clear">
+
+            }
+        </div>
+
+        <hr />
+
+        @using (Html.BeginForm("AddPerson", "Home", FormMethod.Post))
         {
-            <tr>
-                <td>@Model[i].Name</td>
-                <td>@Model[i].Phone</td>
-                <td>@Model[i].City</td>
-            </tr>
+            <p>Add to list:</p>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+                <label for="name">Phone number:</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+                <label for="name">City of residence:</label>
+                <input type="text" class="form-control" id="city" name="city">
+
+                <input type="submit" class="btn btn-basic" value="Add">
+
+            </div>
         }
-    }
 
-</table>
-
-<div class="form-group">
-    <label for="name">Filter list by name:</label>
-    <input type="text" class="form-control" id="filter" name="filter">
+    </div>
 </div>
-
-
-<hr />
-<p>Add to list:</p>
-<div class="form-group">
-    <label for="name">Name:</label>
-    <input type="text" class="form-control" id="name" name="name">
-    <label for="name">Phone number:</label>
-    <input type="text" class="form-control" id="phone" name="phone">
-    <label for="name">City of residence:</label>
-    <input type="text" class="form-control" id="city" name="city">
-
-
-
-</div>
-
-
-
-
-

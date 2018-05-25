@@ -114,8 +114,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\FeverChecker.cs" />
-    <Compile Include="Models\PeopleList.cs" />
     <Compile Include="Models\PersonData.cs" />
+    <Compile Include="Models\StaticDataStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
