@@ -34,7 +34,7 @@
 
         </table>
 
-
+        <label>Sort by: </label>
         <div class="btn-group">
 
             @using (Html.BeginForm("SortList", "Home", FormMethod.Post))
@@ -82,7 +82,7 @@
 
         @using (Html.BeginForm("AddPerson", "Home", FormMethod.Post))
         {
-            <p>Add to list:</p>
+            <label>Add to list:</label>
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" id="name" name="name">

@@ -115,7 +115,7 @@ namespace JS_MVC_Project.Controllers
             {
                 foreach (PersonData person in StaticDataStorage.personList)
                 {
-                    if (person.Name.Equals(filter))
+                    if (person.Name.Contains(filter))
                     { filteredList.Add(person); }
                 }
             }
@@ -123,12 +123,10 @@ namespace JS_MVC_Project.Controllers
             {
                 foreach (PersonData person in StaticDataStorage.personList)
                 {
-                    if (person.Name.Equals(filter, StringComparison.CurrentCultureIgnoreCase))
+                    if (person.Name.ToLower().Contains(filter.ToLower()))
                     { filteredList.Add(person); }
                 }
-
             }
-
 
             return View("ListOfPeople", filteredList);
         }
