@@ -10,51 +10,52 @@
 
 
 <div class="row">
-    <div id="Table_Of_people" class="col-md-9 col-lg-9">
-
-        <div class="row" id="titles">
-            <strong>
-                <span class="col-lg-3 col-md-3">Name</span>
-                <span class="col-lg-3 col-md-3">Telephone number</span>
-                <span class="col-lg-3 col-md-3">City of residence</span>
-            </strong>
-        </div>
-
+    <div id="Table_Of_people" class="col-md-6 col-lg-6">
+        <table id="People_List">
             @{
-            foreach (var item in Model)
-            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Phone</td>
+                        <td>@item.City</td>
 
+                        <td>
+                            @using (Html.BeginForm("RemovePerson", "Home", FormMethod.Post))
+                            {
 
-                Html.RenderPartial("PV_Person", item);
-                    
+                                <input type="hidden" name="person" value="@item.Name" />
+                                <input type="submit" class="btn btn-basic" value="Remove" />
+                            }
+                        </td>
+                    </tr>
+                }
             }
-            }
 
+        </table>
 
-        <hr />
+        <label>Sort by: </label>
+        <div class="btn-group">
 
-            <label>Sort by: </label>
-            <div class="btn-group">
-
-                @using (Html.BeginForm("SortList", "Home", FormMethod.Post))
+            @using (Html.BeginForm("SortList", "Home", FormMethod.Post))
             {
                 <input type="submit" class="btn btn-basic" name="pressedButton" value="Name" />
                 <input type="submit" class="btn btn-basic" name="pressedButton" value="R. Name" />
                 <input type="submit" class="btn btn-basic" name="pressedButton" value="City" />
                 <input type="submit" class="btn btn-basic" name="pressedButton" value="R. City" />
 
-        }
-
-            </div>
-
-
-
+            }
 
         </div>
 
-        <div id="Input_Fields" class="col-md-3 col-lg-3">
-            <div class="form-group">
-                @using (Html.BeginForm("FilterList", "Home", FormMethod.Post))
+
+
+
+    </div>
+
+    <div id="Input_Fields" class="col-md-4 col-lg-4">
+        <div class="form-group">
+            @using (Html.BeginForm("FilterList", "Home", FormMethod.Post))
             {
                 <label for="filter">Filter list by name:</label>
                 <input type="text" class="form-control" id="filter" name="filter">
@@ -66,20 +67,20 @@
                 <input type="checkbox" id="caseSensitive" value="true" name="caseSensitive" checked />
                 <input type="hidden" value="false" name="caseSensitive">
 
-        }
+            }
 
-                @using (Html.BeginForm("ClearFilter", "Home", FormMethod.Post))
+            @using (Html.BeginForm("ClearFilter", "Home", FormMethod.Post))
             {
                 <input type="submit" class="btn btn-basic" value="Clear">
 
-        }
+            }
 
 
-            </div>
+        </div>
 
-            <hr />
+        <hr />
 
-            @using (Html.BeginForm("AddPerson", "Home", FormMethod.Post))
+        @using (Html.BeginForm("AddPerson", "Home", FormMethod.Post))
         {
             <label>Add to list:</label>
             <div class="form-group">
@@ -93,7 +94,7 @@
                 <input type="submit" class="btn btn-basic" value="Add">
 
             </div>
-    }
+        }
 
-        </div>
     </div>
+</div>
