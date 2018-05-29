@@ -189,14 +189,14 @@ namespace JS_MVC_Project.Controllers
 
 
 
-        public ActionResult EditListEntry()
+        public ActionResult EditListEntry(string id)
         {
 
             if (Request.IsAjaxRequest())
             {
 
 
-                return PartialView("PV_EditPerson");
+                return PartialView("PV_EditPerson", id);
 
             }
 

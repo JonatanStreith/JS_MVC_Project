@@ -9,6 +9,7 @@
     @Ajax.ActionLink(linkText: "Edit",
        actionName: "EditListEntry",
        controllerName: "Home",
+       routeValues: new { id = Model.Id },
        ajaxOptions: new AjaxOptions
        {
            UpdateTargetId = Model.Id,
