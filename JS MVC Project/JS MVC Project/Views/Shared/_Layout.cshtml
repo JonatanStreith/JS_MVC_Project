@@ -9,6 +9,14 @@
     <link href="~/css/main.css" rel="stylesheet">
     @*<link href="~/css/sticky-footer.css" rel="stylesheet">*@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -31,6 +39,7 @@
                     <li>@Html.ActionLink("Fever Check", "FeverCheck")</li>
                     <li>@Html.ActionLink("Guessing Game", "GuessingGame")</li>
                     <li>@Html.ActionLink("List of people", "ListOfPeople", "Home")</li>
+                    <li>@Html.ActionLink("Experimental", "Experimental", "Home")</li>
 
 
                 </ul>
@@ -46,7 +55,5 @@
         </footer>
     </div>
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

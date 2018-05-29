@@ -1,8 +1,21 @@
 ﻿@model JS_MVC_Project.Models.PersonData
+<div class="row" id="@Model.Id">
 
-<div class="row">
     <span class="col-lg-3 col-md-3" id="name">@Model.Name</span>
     <span class="col-lg-3 col-md-3" id="phone">@Model.Phone</span>
     <span class="col-lg-3 col-md-3" id="city">@Model.City</span>
-    
+
+
+    @Ajax.ActionLink(linkText: "Edit",
+       actionName: "EditListEntry",
+       controllerName: "Home",
+       ajaxOptions: new AjaxOptions
+       {
+           UpdateTargetId = Model.Id,
+           InsertionMode = InsertionMode.Replace,
+           HttpMethod = "post"
+
+       })
+
+
 </div>

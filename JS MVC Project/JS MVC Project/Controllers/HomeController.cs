@@ -99,8 +99,25 @@ namespace JS_MVC_Project.Controllers
 
 
 
+
+        public ActionResult Experimental()
+        {
+            return View();
+        }
+
+
+
+
+
         public ActionResult ListOfPeople()
         {
+
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("PV_EditPerson");
+
+            }
+
             return View(StaticDataStorage.personList);
         }
 
@@ -141,9 +158,9 @@ namespace JS_MVC_Project.Controllers
 
 
         [HttpPost]
-        public ActionResult AddPerson(string name, string phone, string city)
+        public ActionResult AddPerson(string id, string name, string phone, string city)
         {
-            StaticDataStorage.AddPersonToList(name, phone, city);
+            StaticDataStorage.AddPersonToList(id, name, phone, city);
 
             return View("ListOfPeople", StaticDataStorage.personList);
         }
@@ -169,6 +186,39 @@ namespace JS_MVC_Project.Controllers
 
             return View("ListOfPeople", StaticDataStorage.personList);
         }
+
+
+
+        public ActionResult EditListEntry()
+        {
+
+            if (Request.IsAjaxRequest())
+            {
+
+
+                return PartialView("PV_EditPerson");
+
+            }
+
+
+            return View("ListOfPeople", StaticDataStorage.personList);
+        }
+
+
+
+
+
+
+
+
+
+
+        public string GetStuff()
+        {
+            return "Stuff!";
+        }
+
+
 
 
     }

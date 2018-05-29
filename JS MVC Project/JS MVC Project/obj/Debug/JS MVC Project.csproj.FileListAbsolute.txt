@@ -140,3 +140,7 @@ C:\Users\Jonatan Streith\Documents\GitHub\JS_MVC_Project\JS MVC Project\JS MVC P
 C:\Users\Jonatan Streith\Documents\GitHub\JS_MVC_Project\JS MVC Project\JS MVC Project\obj\Debug\JS MVC Project.csproj.CopyComplete
 C:\Users\Jonatan Streith\Documents\GitHub\JS_MVC_Project\JS MVC Project\JS MVC Project\obj\Debug\JS MVC Project.dll
 C:\Users\Jonatan Streith\Documents\GitHub\JS_MVC_Project\JS MVC Project\JS MVC Project\obj\Debug\JS MVC Project.pdb
+C:\Users\Lexicon\source\repos\JS_MVC_Project\JS MVC Project\JS MVC Project\bin\jQuery.Validation.Unobtrusive.Native.dll
+C:\Users\Lexicon\source\repos\JS_MVC_Project\JS MVC Project\JS MVC Project\bin\Newtonsoft.Json.dll
+C:\Users\Lexicon\source\repos\JS_MVC_Project\JS MVC Project\JS MVC Project\bin\Newtonsoft.Json.pdb
+C:\Users\Lexicon\source\repos\JS_MVC_Project\JS MVC Project\JS MVC Project\bin\Newtonsoft.Json.xml

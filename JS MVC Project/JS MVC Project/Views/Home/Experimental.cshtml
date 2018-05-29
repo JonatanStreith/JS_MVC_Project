@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Experimental";
+}
+
+<h2>Experimental</h2>
+
+<div>
+
+    @Ajax.ActionLink(linkText: "Edit",
+            actionName: "GetStuff",
+            ajaxOptions: new AjaxOptions
+            {
+                UpdateTargetId = "test",
+                InsertionMode = InsertionMode.InsertAfter
+
+            })
+
+
+</div>
+
+
+<div id="test"></div>

@@ -1,0 +1,38 @@
+﻿@model JS_MVC_Project.Models.PersonData
+
+<div class="row" id="personentry">
+
+
+    @using (Ajax.BeginForm(
+            new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "personentry"
+
+
+            }))
+
+    {
+        <div class="col-lg-3 col-md-3">
+            <input type="text" class="form-control" id="name" name="name" />
+        </div>
+
+        <div class="col-lg-3 col-md-3">
+            <input type="text" class="form-control" id="phone" name="phone" />
+        </div>
+
+        <div class="col-lg-3 col-md-3">
+            <input type="text" class="form-control" id="city" name="city" />
+        </div>
+
+
+        <input type="submit" value="Change" />
+    }
+
+
+
+
+
+
+</div>
