@@ -205,7 +205,7 @@ namespace JS_MVC_Project.Controllers
 
             StaticDataStorage.SortList(pressedButton);
 
-            return View("ListOfPeople", StaticDataStorage.personList);
+            return PartialView("PV_PersonTable", StaticDataStorage.personList);
         }
 
 
