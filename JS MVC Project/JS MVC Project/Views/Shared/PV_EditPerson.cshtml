@@ -1,33 +1,45 @@
 ﻿@model string
 
-<div class="row" id="personentry">
+
+
+
+<div class="row" id="@Model">
 
 
     @using (Ajax.BeginForm(
-            new AjaxOptions
-            {
-                HttpMethod = "get",
-                InsertionMode = InsertionMode.Replace,
-                UpdateTargetId = "personentry"
+        actionName: "MakeEdit",
+        controllerName: "Home",
+        ajaxOptions: new AjaxOptions
+        {
+            UpdateTargetId = Model,
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
 
 
-            }))
+        }))
 
     {
+        @Html.AntiForgeryToken()
+
+    <div class="row">
+
+        <input type="hidden" name="Id" value="@Model" />
+
         <div class="col-lg-3 col-md-3">
-            <input type="text" class="form-control" id="name" name="name" />
+            <input type="text" class="form-control" id="name" name="Name" />
         </div>
 
         <div class="col-lg-3 col-md-3">
-            <input type="text" class="form-control" id="phone" name="phone" />
+            <input type="text" class="form-control" id="phone" name="Phone" />
         </div>
 
         <div class="col-lg-3 col-md-3">
-            <input type="text" class="form-control" id="city" name="city" />
+            <input type="text" class="form-control" id="city" name="City" />
         </div>
 
 
-        <input type="submit" value="Change" />
+        <input type="submit" class="btn btn-default" value="Change" />
+    </div>
     }
 
 

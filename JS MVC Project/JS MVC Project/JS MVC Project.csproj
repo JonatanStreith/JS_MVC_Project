@@ -147,6 +147,8 @@
     <Content Include="Views\Shared\PV_Person.cshtml" />
     <Content Include="Views\Shared\PV_EditPerson.cshtml" />
     <Content Include="Views\Home\Experimental.cshtml" />
+    <Content Include="Views\Shared\PV_Blank.cshtml" />
+    <Content Include="Views\Shared\PV_PersonTable.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

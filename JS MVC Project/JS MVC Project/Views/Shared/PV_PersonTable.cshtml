@@ -1,0 +1,9 @@
+﻿@model List<JS_MVC_Project.Models.PersonData>
+
+@{
+    foreach (var item in Model)
+    {
+        Html.RenderPartial("PV_Person", item);
+
+    }
+}

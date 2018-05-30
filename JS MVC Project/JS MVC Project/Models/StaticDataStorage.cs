@@ -10,23 +10,28 @@ namespace JS_MVC_Project.Models
 
         public static List<PersonData> personList = new List<PersonData>()
         {
-            new PersonData("1", "Jonatan Streith", "070-2560731", "Skövde"),
-            new PersonData("2", "Vladimir Putin", "0500-Communism", "Moscow"),
-            new PersonData("3", "Princess Celestia", "0500-Sunshine", "Canterlot"),
-            new PersonData("4", "Monkey D. Luffy", "020-GomuGomu", "Grand Line"),
-            new PersonData("5", "Sheogorath", "0660-CHEESE", "Shivering Isles")
+            new PersonData(){ Id = "1", Name = "Jonatan Streith", Phone = "070-2560731", City = "Skövde" },
+            new PersonData(){ Id = "2", Name = "Vladimir Putin", Phone = "0500-Communism", City = "Moscow" },
+            new PersonData(){ Id = "3", Name = "Princess Celestia", Phone = "0500-Sunshine", City = "Canterlot" },
+            new PersonData(){ Id = "4", Name = "Monkey D. Luffy", Phone = "020-GomuGomu", City = "Grand Line" },
+            new PersonData(){ Id = "5", Name = "Sheogorath", Phone = "0660-CHEESE", City = "Shivering Isles" }
 
         };
 
 
-        public static void AddPersonToList(string id, string name, string phone, string city)
+        public static void AddPersonToList(string name, string phone, string city)
         {
-            personList.Add(new PersonData(id, name, phone, city));
+
+            string id = Convert.ToString(personList.Count + 1);
+
+            personList.Add(new PersonData() { Id = id, City = city, Name = name, Phone = phone });
         }
 
-        public static void RemovePersonFromList(PersonData person)
+        public static void RemovePersonFromList(string id)
         {
-            personList.Remove(person);
+
+
+            personList.Remove(personList.Find(p => p.Id == id));
         }
 
 
@@ -62,6 +67,41 @@ namespace JS_MVC_Project.Models
         }
 
 
+        public static void ReplacePerson(PersonData person)
+        {
+            int pos = personList.IndexOf(personList.Find(p => p.Id == person.Id));
+
+            personList.RemoveAt(pos);
+            personList.Insert(pos, person);
+
+        }
+
+
+
+        public static List<PersonData> FilterList(string filter, bool caseSensitive)
+        {
+
+            List<PersonData> filteredList = new List<PersonData>();
+
+            if (caseSensitive)
+            {
+                foreach (PersonData person in personList)
+                {
+                    if (person.Name.Contains(filter))
+                    { filteredList.Add(person); }
+                }
+            }
+            else
+            {
+                foreach (PersonData person in personList)
+                {
+                    if (person.Name.ToLower().Contains(filter.ToLower()))
+                    { filteredList.Add(person); }
+                }
+            }
+
+            return filteredList;
+        }
 
     }
 }

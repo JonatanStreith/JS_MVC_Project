@@ -122,60 +122,81 @@ namespace JS_MVC_Project.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult FilterList(string filter, bool caseSensitive)
+        //[HttpPost]
+        //public ActionResult FilterList(string filter, bool caseSensitive)
+        //{
+        //    List<PersonData> filteredList = new List<PersonData>();
+
+
+        //    if (caseSensitive)
+        //    {
+        //        foreach (PersonData person in StaticDataStorage.personList)
+        //        {
+        //            if (person.Name.Contains(filter))
+        //            { filteredList.Add(person); }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        foreach (PersonData person in StaticDataStorage.personList)
+        //        {
+        //            if (person.Name.ToLower().Contains(filter.ToLower()))
+        //            { filteredList.Add(person); }
+        //        }
+        //    }
+
+        //    return View("ListOfPeople", filteredList);
+        //}
+
+            [HttpPost]
+            public ActionResult FilterList(string filter, bool caseSensitive)
         {
-            List<PersonData> filteredList = new List<PersonData>();
+
+            if (ModelState.IsValid)
+            {
+
+                return PartialView("PV_PersonTable", StaticDataStorage.FilterList(filter, caseSensitive));
 
 
-            if (caseSensitive)
-            {
-                foreach (PersonData person in StaticDataStorage.personList)
-                {
-                    if (person.Name.Contains(filter))
-                    { filteredList.Add(person); }
-                }
-            }
-            else
-            {
-                foreach (PersonData person in StaticDataStorage.personList)
-                {
-                    if (person.Name.ToLower().Contains(filter.ToLower()))
-                    { filteredList.Add(person); }
-                }
             }
 
-            return View("ListOfPeople", filteredList);
+
+
+
+
+                return View(StaticDataStorage.personList);
         }
+
+
 
         [HttpPost]
         public ActionResult ClearFilter()
         {
-            return View("ListOfPeople", StaticDataStorage.personList);
+            return PartialView("PV_PersonTable", StaticDataStorage.personList);
         }
 
 
 
 
         [HttpPost]
-        public ActionResult AddPerson(string id, string name, string phone, string city)
+        public ActionResult AddPerson(string name, string phone, string city)
         {
-            StaticDataStorage.AddPersonToList(id, name, phone, city);
+            StaticDataStorage.AddPersonToList(name, phone, city);
 
-            return View("ListOfPeople", StaticDataStorage.personList);
+            return PartialView("PV_PersonTable", StaticDataStorage.personList);
         }
 
 
-        [HttpPost]
-        public ActionResult RemovePerson(string person)
-        {
+        //[HttpPost]
+        //public ActionResult RemovePerson(string person)
+        //{
 
-            PersonData _person = StaticDataStorage.personList.Find(x => x.Name == person);
+        //    PersonData _person = StaticDataStorage.personList.Find(x => x.Name == person);
 
-            StaticDataStorage.RemovePersonFromList(_person);
+        //    StaticDataStorage.RemovePersonFromList(_person);
 
-            return RedirectToAction("ListOfPeople");
-        }
+        //    return RedirectToAction("ListOfPeople");
+        //}
 
 
         [HttpPost]
@@ -204,8 +225,35 @@ namespace JS_MVC_Project.Controllers
             return View("ListOfPeople", StaticDataStorage.personList);
         }
 
+        [HttpPost]
+        public ActionResult MakeEdit([Bind(Include = "Id, Name, Phone, City")] PersonData data)
+        {
+
+            if (ModelState.IsValid)
+            {
+                StaticDataStorage.ReplacePerson(data);
+                return PartialView("PV_Person", data);
+            }
+
+            return View("ListOfPeople", StaticDataStorage.personList);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveListEntry(string id)
+        {
+
+            if (ModelState.IsValid)
+            {
+                StaticDataStorage.RemovePersonFromList(id);
 
 
+                return PartialView("PV_Blank");
+            }
+
+
+            return View("ListOfPeople", StaticDataStorage.personList);
+
+        }
 
 
 

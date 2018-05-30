@@ -20,17 +20,10 @@
             </strong>
         </div>
 
-        @{
-            foreach (var item in Model)
-            {
-                    Html.RenderPartial("PV_Person", item);
+        <div class="row" id="entries">
+            @Html.Partial("PV_PersonTable", Model)
 
-
-
-
-            }
-        }
-
+        </div>
 
         <hr />
 
@@ -39,10 +32,10 @@
 
             @using (Html.BeginForm("SortList", "Home", FormMethod.Post))
             {
-                <input type="submit" class="btn btn-basic" name="pressedButton" value="Name" />
-                <input type="submit" class="btn btn-basic" name="pressedButton" value="R. Name" />
-                <input type="submit" class="btn btn-basic" name="pressedButton" value="City" />
-                <input type="submit" class="btn btn-basic" name="pressedButton" value="R. City" />
+                <input type="submit" class="btn btn-default" name="pressedButton" value="Name" />
+                <input type="submit" class="btn btn-default" name="pressedButton" value="R. Name" />
+                <input type="submit" class="btn btn-default" name="pressedButton" value="City" />
+                <input type="submit" class="btn btn-default" name="pressedButton" value="R. City" />
 
             }
 
@@ -54,14 +47,14 @@
     </div>
 
     <div id="Input_Fields" class="col-md-3 col-lg-3">
-        <div class="form-group">
+        @*<div class="form-group">
             @using (Html.BeginForm("FilterList", "Home", FormMethod.Post))
             {
                 <label for="filter">Filter list by name:</label>
                 <input type="text" class="form-control" id="filter" name="filter">
 
 
-                <input type="submit" class="btn btn-basic" value="Filter">
+                <input type="submit" class="btn btn-default" value="Filter">
 
                 <label for="case_sensitive">Case Sensitive: </label>
                 <input type="checkbox" id="caseSensitive" value="true" name="caseSensitive" checked />
@@ -71,16 +64,64 @@
 
             @using (Html.BeginForm("ClearFilter", "Home", FormMethod.Post))
             {
-                <input type="submit" class="btn btn-basic" value="Clear">
+                <input type="submit" class="btn btn-default" value="Clear">
 
             }
 
 
+        </div>*@
+
+
+        <div class="form-group">
+            @using (Ajax.BeginForm(
+            actionName: "FilterList",
+            controllerName: "Home",
+
+            ajaxOptions: new AjaxOptions
+            {
+                UpdateTargetId = "entries",
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace
+            }))
+        {
+            <label for="filter">Filter list by name:</label>
+            <input type="text" class="form-control" id="filter" name="filter">
+
+
+            <input type="submit" class="btn btn-default" value="Filter">
+
+            <label for="case_sensitive">Case Sensitive: </label>
+            <input type="checkbox" id="caseSensitive" value="true" name="caseSensitive" checked />
+            <input type="hidden" value="false" name="caseSensitive">
+
+    }
+
+            @using (Ajax.BeginForm(
+            actionName: "ClearFilter",
+            controllerName: "Home",
+
+            ajaxOptions: new AjaxOptions
+            {
+                UpdateTargetId = "entries",
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace
+
+
+            }))
+        {
+            <input type="submit" class="btn btn-default" value="Clear">
+
+    }
+
+
         </div>
+
+
+
 
         <hr />
 
-        @using (Html.BeginForm("AddPerson", "Home", FormMethod.Post))
+        @*@using (Html.BeginForm("AddPerson", "Home", FormMethod.Post))
         {
             <label>Add to list:</label>
             <div class="form-group">
@@ -91,10 +132,39 @@
                 <label for="name">City of residence:</label>
                 <input type="text" class="form-control" id="city" name="city">
 
-                <input type="submit" class="btn btn-basic" value="Add">
+                <input type="submit" class="btn btn-default" value="Add">
 
             </div>
-        }
+        }*@
+
+
+        @using (Ajax.BeginForm("AddPerson", "Home", new AjaxOptions {
+
+            UpdateTargetId = "entries",
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace
+
+
+
+        }))
+        {
+        <label>Add to list:</label>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name">
+            <label for="name">Phone number:</label>
+            <input type="text" class="form-control" id="phone" name="phone">
+            <label for="name">City of residence:</label>
+            <input type="text" class="form-control" id="city" name="city">
+
+            <input type="submit" class="btn btn-default" value="Add">
+
+        </div>
+}
+
+
+
+
 
     </div>
 </div>

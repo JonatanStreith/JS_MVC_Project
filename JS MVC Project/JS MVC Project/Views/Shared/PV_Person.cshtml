@@ -7,16 +7,42 @@
 
 
     @Ajax.ActionLink(linkText: "Edit",
-       actionName: "EditListEntry",
-       controllerName: "Home",
-       routeValues: new { id = Model.Id },
-       ajaxOptions: new AjaxOptions
-       {
-           UpdateTargetId = Model.Id,
-           InsertionMode = InsertionMode.Replace,
-           HttpMethod = "post"
+           actionName: "EditListEntry",
+           controllerName: "Home",
+           routeValues: new { id = Model.Id },
+           ajaxOptions: new AjaxOptions
+           {
+               UpdateTargetId = Model.Id,
+               InsertionMode = InsertionMode.Replace,
+               HttpMethod = "post"
 
-       })
+           },
+
+           htmlAttributes: new { @class = "btn btn-default" }
+
+
+
+           )
+
+    @Ajax.ActionLink(linkText: "Delete",
+        actionName: "RemoveListEntry",
+        controllerName: "Home",
+        routeValues: new { id = Model.Id },
+        ajaxOptions: new AjaxOptions
+        {
+            UpdateTargetId = Model.Id,
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "post"
+
+        },
+
+        htmlAttributes: new { @class = "btn btn-default" }
+
+
+
+        )
+
+
 
 
 </div>
