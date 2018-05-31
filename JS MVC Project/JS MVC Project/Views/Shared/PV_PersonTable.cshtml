@@ -1,9 +1,22 @@
-﻿@model List<JS_MVC_Project.Models.PersonData>
+﻿@model JS_MVC_Project.Models.PersonDataBundle
 
 @{
-    foreach (var item in Model)
-    {
-        Html.RenderPartial("PV_Person", item);
+    int start = Model.TheListStart;
+    if(start < 0) { start = 0; }
+    int end = Model.TheListStart + 10;
+    if(end>Model.TheList.Count) { end = Model.TheList.Count; }
+
+
+    for(int i = start; i < end; i++) {
+
+        Html.RenderPartial("PV_Person", Model.TheList[i]);
 
     }
+
+
+    //foreach (var item in Model)
+    //{
+    //    Html.RenderPartial("PV_Person", item);
+
+    //}
 }

@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="Models\FeverChecker.cs" />
     <Compile Include="Models\PersonData.cs" />
+    <Compile Include="Models\PersonDataBundle.cs" />
     <Compile Include="Models\StaticDataStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

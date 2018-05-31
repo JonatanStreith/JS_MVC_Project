@@ -105,7 +105,7 @@ namespace JS_MVC_Project.Controllers
             return View();
         }
 
-
+        //----------------------------------
 
 
 
@@ -114,7 +114,12 @@ namespace JS_MVC_Project.Controllers
 
             if (Request.IsAjaxRequest())
             {
+
+                if (ModelState.IsValid)
+                {
+
                 return PartialView("PV_EditPerson");
+                }
 
             }
 
@@ -122,49 +127,43 @@ namespace JS_MVC_Project.Controllers
         }
 
 
-        //[HttpPost]
-        //public ActionResult FilterList(string filter, bool caseSensitive)
-        //{
-        //    List<PersonData> filteredList = new List<PersonData>();
 
 
-        //    if (caseSensitive)
-        //    {
-        //        foreach (PersonData person in StaticDataStorage.personList)
-        //        {
-        //            if (person.Name.Contains(filter))
-        //            { filteredList.Add(person); }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        foreach (PersonData person in StaticDataStorage.personList)
-        //        {
-        //            if (person.Name.ToLower().Contains(filter.ToLower()))
-        //            { filteredList.Add(person); }
-        //        }
-        //    }
 
-        //    return View("ListOfPeople", filteredList);
-        //}
 
-            [HttpPost]
-            public ActionResult FilterList(string filter, bool caseSensitive)
+        public ActionResult DisplayTable()
+        {
+
+
+            if (ModelState.IsValid)
+            {
+
+                return PartialView("PV_PersonTable", new PersonDataBundle { TheList = StaticDataStorage.personList, TheListStart = StaticDataStorage.displayIndex });
+
+        }
+            return View(StaticDataStorage.personList);
+
+        }
+
+
+
+
+
+    [HttpPost]
+        public ActionResult FilterList(string filter, bool caseSensitive)
         {
 
             if (ModelState.IsValid)
             {
 
-                return PartialView("PV_PersonTable", StaticDataStorage.FilterList(filter, caseSensitive));
+
+                StaticDataStorage.FilterList(filter, caseSensitive);
+
+                return PartialView("PV_PersonTable", new PersonDataBundle { TheList = StaticDataStorage.personList, TheListStart = StaticDataStorage.displayIndex });
 
 
             }
-
-
-
-
-
-                return View(StaticDataStorage.personList);
+            return View(StaticDataStorage.personList);
         }
 
 
@@ -172,7 +171,20 @@ namespace JS_MVC_Project.Controllers
         [HttpPost]
         public ActionResult ClearFilter()
         {
-            return PartialView("PV_PersonTable", StaticDataStorage.personList);
+
+            if (ModelState.IsValid)
+            {
+
+
+            StaticDataStorage.ClearFilter();
+
+            return PartialView("PV_PersonTable", new PersonDataBundle { TheList = StaticDataStorage.personList, TheListStart = StaticDataStorage.displayIndex });
+
+
+            }
+
+            return View(StaticDataStorage.personList);
+
         }
 
 
@@ -181,31 +193,31 @@ namespace JS_MVC_Project.Controllers
         [HttpPost]
         public ActionResult AddPerson(string name, string phone, string city)
         {
+            if (ModelState.IsValid)
+            {
+
             StaticDataStorage.AddPersonToList(name, phone, city);
 
-            return PartialView("PV_PersonTable", StaticDataStorage.personList);
+            return PartialView("PV_PersonTable", new PersonDataBundle { TheList = StaticDataStorage.personList, TheListStart = StaticDataStorage.displayIndex });
+            }
+            return View(StaticDataStorage.personList);
+
         }
 
 
-        //[HttpPost]
-        //public ActionResult RemovePerson(string person)
-        //{
-
-        //    PersonData _person = StaticDataStorage.personList.Find(x => x.Name == person);
-
-        //    StaticDataStorage.RemovePersonFromList(_person);
-
-        //    return RedirectToAction("ListOfPeople");
-        //}
 
 
         [HttpPost]
         public ActionResult SortList(string pressedButton)
         {
+            if (ModelState.IsValid)
+            {
 
             StaticDataStorage.SortList(pressedButton);
 
-            return PartialView("PV_PersonTable", StaticDataStorage.personList);
+            return PartialView("PV_PersonTable", new PersonDataBundle { TheList = StaticDataStorage.personList, TheListStart = StaticDataStorage.displayIndex });
+            }
+            return View(StaticDataStorage.personList);
         }
 
 
@@ -215,11 +227,14 @@ namespace JS_MVC_Project.Controllers
 
             if (Request.IsAjaxRequest())
             {
+                if (ModelState.IsValid)
+                {
 
 
                 return PartialView("PV_EditPerson", id);
 
             }
+                }
 
 
             return View("ListOfPeople", StaticDataStorage.personList);
@@ -254,6 +269,46 @@ namespace JS_MVC_Project.Controllers
             return View("ListOfPeople", StaticDataStorage.personList);
 
         }
+
+        public ActionResult PrevNext(string pressedButton)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                if (pressedButton == "Prev 10")
+                {
+                    StaticDataStorage.displayIndex -= 10;
+                }
+                else if (pressedButton == "Next 10")
+                {
+                    StaticDataStorage.displayIndex += 10;
+                }
+
+
+
+
+                return PartialView("PV_PersonTable", new PersonDataBundle { TheList = StaticDataStorage.personList, TheListStart = StaticDataStorage.displayIndex });
+
+
+
+
+
+
+            }
+
+
+
+            return View("ListOfPeople", StaticDataStorage.personList);
+
+
+        }
+
+
+
+
+
+
 
 
 
