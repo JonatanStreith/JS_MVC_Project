@@ -278,11 +278,13 @@ namespace JS_MVC_Project.Controllers
 
                 if (pressedButton == "Prev 10")
                 {
-                    StaticDataStorage.displayIndex -= 10;
+                    if(StaticDataStorage.displayIndex > 0) { StaticDataStorage.displayIndex -= 10;}
+
+                    
                 }
                 else if (pressedButton == "Next 10")
                 {
-                    StaticDataStorage.displayIndex += 10;
+                    if (StaticDataStorage.displayIndex < (StaticDataStorage.personList.Count-10)) { StaticDataStorage.displayIndex += 10; }
                 }
 
 
